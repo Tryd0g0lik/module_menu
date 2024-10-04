@@ -5,3 +5,6 @@ exclude =
     */.github,
     */.*,
     */main.py,
+    */.editorconfig
+    */archive
+    */Python

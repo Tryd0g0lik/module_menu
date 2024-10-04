@@ -15,6 +15,6 @@ curly_bracket_next_line = true
 trim_trailing_whitespace = true
 
 [*.min.*]
-indent_style = ignore
+# indent_style = ignore
 trim_trailing_whitespace = false
 insert_final_newline = false

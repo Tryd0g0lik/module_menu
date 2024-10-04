@@ -1,2 +1,15 @@
 [MESSAGES CONTROL]
-disable = W0621,  W0613, C0116, R0913, W0612, R0914, W0718
+disable=
+    W0621,
+    W0613,
+    C0116,
+    R0913,
+    W0612,
+    R0914,
+    W0718,
+    C0103,
+    R0901
+ignore-path=
+    project_root.settings.py
+# Максимальная глубина наследования
+max-ancestors=11

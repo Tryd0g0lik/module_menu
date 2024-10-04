@@ -16,8 +16,19 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+
+from module_menu.routers import router_menu
+from module_menu.views import get_index_page
+
+from .rest_router import router
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path(
+        "menu/",
+        include((router_menu.urlpatterns, "modulemenu"), namespace="modulemenu"),
+    ),
+    path("api/v1/", include(router.urls)),
+    path("", get_index_page, "index"),
 ]
