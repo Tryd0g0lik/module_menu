@@ -27,7 +27,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path(
         "menu/",
-        include((router_menu.urlpatterns, "modulemenu"), namespace="modulemenu"),
+        include((router_menu.urlpatterns, "module_menu"), namespace="module_menu"),
     ),
     path("api/v1/", include(router.urls)),
     path("", get_index_page, "index"),
