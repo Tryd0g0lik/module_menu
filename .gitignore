@@ -268,5 +268,7 @@ pyrightconfig.json
 ### More other ###
 pic/*
 **/pic/*
-archive
+archive/*
+!archive/db-module_menu.drawio
+!archive/db-module_menu.drawio.png
 */tests
