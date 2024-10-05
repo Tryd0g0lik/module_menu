@@ -17,13 +17,15 @@ class BaseLinkModel(models.Model):
 
     links = models.CharField(
         max_length=100,
-        help_text=_("/ваш/маршрут/на/внутреннюю/страницу/сайта/"),
+        help_text=_("ваш/маршрут/на/внутреннюю/страницу/сайта/"),
         validators=[
             MaxLengthValidator(
                 limit_value=100, message=_("""Максимальная длина 100 символов""")
             ),
             RegexValidator(
-                regex=r"^(?!.*  )[a-z][\w\-_\d]{1,98}\/$[^\S\W \\]?",
+                regex=r"^(?!.*  )[a-z][\w\-_\d]{1,98}\/$[^\S\W \/]?",
+                # regex=
+                # r"^(?!.*  )[a-zA-Zа-яА-ЯёЁ][\w \-_\dа-яА-ЯёЁ]{0,98}[a-zA-Zа-яА-ЯёЁ0-9\/]$",
                 message=_("Неверный формат ссылки."),
             ),
         ],
@@ -34,21 +36,22 @@ class BaseLinkModel(models.Model):
         blank=True,
         null=True,
         max_length=50,
-        help_text=_("""Заголовок пункта меню (ссылки)"""),
+        help_text=_("Текст ссылки (Text refer)"),
         verbose_name=_("Текст ссылки"),
         validators=[
             MaxLengthValidator(
-                limit_value=50, message=_("""Максимальная длина 30 символов""")
+                limit_value=50, message=_("""Максимальная длина 50 символов""")
             ),
             RegexValidator(
-                regex=r"^(?!.*  )[a-zA-Z][\w \-_\d]{1,28}[a-zA-Z0-9]$[^\S\W \\]?",
+                regex=r"^(?!.*  )[a-zA-Zа-яА-ЯёЁ][\w \-_\dа-яА-ЯёЁ]{1,48}[a-zA-Zа-яА-ЯёЁ]$[^\S\W \\]?",
                 message=_(
                     """
                     Название не должно иметь двух пробелов подряд,
                     символов не принадлежащих к алфавиту и(или) цифрам.
-                    Начинается из любой буквы. Заканчивается из любой буквы и
-                    цифры.
-                    Допускается дефис и(или) нижнее подчёркивание
+                    Начинается из любой буквы. Заканчивается из любой буквы
+                    и(или) цифры.
+                    Допускается дефис и(или) нижнее подчёркивание.
+                    
                     """
                 ),
             ),
@@ -112,7 +115,7 @@ class MenuNamesMode(models.Model):
     )
 
     def __str__(self):
-        return _(f"""Заголовок меню: {self.names}""")
+        return "%s" % (self.names)
 
     class Meta:
         verbose_name = _("Заголовок меню")
@@ -123,9 +126,16 @@ class LinksMode(BaseLinkModel):
     """
     References
     """
-
+    active = models.BooleanField(
+        verbose_name=_("Активное или не активное"),
+        help_text=_(
+            """
+         вложенности Активное или не активное меню на странице сайта
+        """
+        ),
+    )
     def __str__(self):
-        return _(f"""Пункт меню: {self.texts}""")
+        return self.texts
 
     class Meta:
         verbose_name = "Ссылка в меню"
@@ -154,14 +164,7 @@ class SubLinksMode(BaseLinkModel):
         ],
         verbose_name=_("Маршрут"),
     )
-    active = models.BooleanField(
-        verbose_name=_("Активное или не активное"),
-        help_text=_(
-            """
-        Активное или не активное меню на странице сайта
-        """
-        ),
-    )
+   
     name_id = models.ForeignKey(
         MenuNamesMode,
         on_delete=models.CASCADE,
@@ -190,7 +193,7 @@ class SubLinksMode(BaseLinkModel):
     )
 
     def __str__(self):
-        return _(f"""Пункт меню: {self.texts}""")
+        return "%s" % self.texts
 
     class Meta:
         verbose_name = "Ссылка в под-меню"

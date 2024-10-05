@@ -36,23 +36,24 @@ from module_menu.models import LinksMode, MenuNamesMode, SubLinksMode
 class SubLinksInLine(admin.TabularInline):
     model = SubLinksMode
     extra = 0
-
+# @admin.register(SubLinksMode)
+# class SubLinksImLine(admin.ModelAdmin):
+#     fields = [
+#         ("links", "texts", "active"),
+#         "name_id",
+#         "links_id"
+#     ]
 
 @admin.register(MenuNamesMode)
 class MenuNamesInLine(admin.ModelAdmin):
     fields = [("names", "levels")]
     list_display = ["names", "levels"]
-    inlines = [SubLinksInLine]
+    # inlines = [SubLinksInLine]
 
 
 @admin.register(LinksMode)
 class LinksInLine(admin.ModelAdmin):
-    fields = [("links", "text")]
+    fields = [("links", "texts", "active")]
     list_filter = []
-    # list_display = [
-    #     "links", "text"
-    # ]
-    # list_display_links = [
-    #     "text"
-    # ]
+
     inlines = [SubLinksInLine]
