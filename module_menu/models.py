@@ -1,7 +1,10 @@
+from django.core.cache import cache
 from django.core.validators import MaxLengthValidator, RegexValidator
 # validate_slug, validate_unicode_slug)
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+
+cache.clear()
 
 
 # Create your models here.
@@ -160,18 +163,18 @@ class SubLinksMode(BaseLinkModel):
         ),
     )
     name_id = models.ForeignKey(
-            MenuNamesMode,
-            on_delete=models.CASCADE,
-            related_name="menunames",
-            verbose_name=_("Выбрать меню"),
-            help_text=_(
-                """
+        MenuNamesMode,
+        on_delete=models.CASCADE,
+        related_name="linksmenu",
+        verbose_name=_("Выбрать меню"),
+        help_text=_(
+            """
             Меню в котором будет опубликована ссылка
             """
-            ),
-            db_column="name_id",
         ),
-    
+        db_column="name_id",
+    )
+
     links_id = models.ForeignKey(
         LinksMode,
         on_delete=models.CASCADE,
