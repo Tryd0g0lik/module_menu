@@ -159,8 +159,7 @@ class SubLinksMode(BaseLinkModel):
         """
         ),
     )
-    name_id = (
-        models.ForeignKey(
+    name_id = models.ForeignKey(
             MenuNamesMode,
             on_delete=models.CASCADE,
             related_name="menunames",
@@ -172,7 +171,7 @@ class SubLinksMode(BaseLinkModel):
             ),
             db_column="name_id",
         ),
-    )
+    
     links_id = models.ForeignKey(
         LinksMode,
         on_delete=models.CASCADE,
