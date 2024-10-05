@@ -35,7 +35,7 @@ class BaseLinkModel(models.Model):
         null=True,
         max_length=50,
         help_text=_("""Заголовок пункта меню (ссылки)"""),
-        verbose_name=_("Заголовок ссылки"),
+        verbose_name=_("Текст ссылки"),
         validators=[
             MaxLengthValidator(
                 limit_value=50, message=_("""Максимальная длина 30 символов""")
