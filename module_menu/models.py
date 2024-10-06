@@ -82,6 +82,15 @@ class PageModel(BaseLinkModel):
             """
         ),
     )
+    active = models.BooleanField(
+        default=False,
+        verbose_name=_("Активное"),
+        help_text=_(
+            """
+         Страница "True"-публикуется.
+        """
+        ),
+    )
 
     def __str__(self):
         return "%s" % self.texts
@@ -175,6 +184,20 @@ class LinksMode(BaseLinkModel):
             """
          вложенности Активное или не активное меню на странице сайта
         """
+        ),
+    )
+
+    links = models.ForeignKey(
+        PageModel,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="pageыlink",
+        verbose_name=_("Выбрать страницу"),
+        help_text=_(
+            """
+            Страница на которой будет опубликовано меню
+            """
         ),
     )
 
