@@ -16,6 +16,7 @@ class BaseLinkModel(models.Model):
     """
 
     links = models.CharField(
+        unique=True,
         max_length=100,
         help_text=_("ваш/маршрут/на/внутреннюю/страницу/сайта/"),
         validators=[
@@ -127,7 +128,7 @@ class LinksMode(BaseLinkModel):
     References
     """
     active = models.BooleanField(
-        verbose_name=_("Активное или не активное"),
+        verbose_name=_("Активное"),
         help_text=_(
             """
          вложенности Активное или не активное меню на странице сайта
@@ -193,8 +194,8 @@ class SubLinksMode(BaseLinkModel):
     )
 
     def __str__(self):
-        return "%s" % self.texts
+        return "%s" % self.name_id
 
     class Meta:
-        verbose_name = "Ссылка в под-меню"
-        verbose_name_plural = "Ссылки в под-меню"
+        verbose_name = "Меню и под-меню"
+        verbose_name_plural = "Меню и под-меню"

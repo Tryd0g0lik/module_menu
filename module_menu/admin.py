@@ -44,16 +44,18 @@ class SubLinksInLine(admin.TabularInline):
 #         "links_id"
 #     ]
 
-@admin.register(MenuNamesMode)
-class MenuNamesInLine(admin.ModelAdmin):
-    fields = [("names", "levels")]
-    list_display = ["names", "levels"]
-    # inlines = [SubLinksInLine]
+# @admin.register(MenuNamesMode)
+# class MenuNamesInLine(admin.ModelAdmin):
+#     fields = [("names", "levels")]
+#     list_display = ["names", "levels"]
 
 
 @admin.register(LinksMode)
 class LinksInLine(admin.ModelAdmin):
     fields = [("links", "texts", "active")]
+    list_display = [
+        "links", "texts", "active"
+    ]
     list_filter = []
 
     inlines = [SubLinksInLine]
