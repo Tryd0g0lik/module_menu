@@ -234,6 +234,7 @@ class SubLinksMode(BaseLinkModel):
 
     name_id = models.ForeignKey(
         MenuNamesMode,
+        unique=True,
         on_delete=models.CASCADE,
         related_name="linksmenu",
         verbose_name=_("Выбрать меню"),
