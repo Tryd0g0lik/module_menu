@@ -72,8 +72,8 @@ class PageModel(BaseLinkModel):
 
     menu_id = models.ManyToManyField(
         "MenuNamesMode",
-        blank=True,
-        null=True,
+        # blank=True,
+        # null=True,
         related_name="pages_menu",
         verbose_name=_("Выбрать меню"),
         help_text=_(
@@ -89,8 +89,19 @@ class PageModel(BaseLinkModel):
             """
          Страница "True"-публикуется.
         """
-        ),
+        )
     )
+    # template = models.ForeignKey(
+    #     "PageTemplatesMode",
+    #     on_delete=models.CASCADE,
+    #     related_name="templates",
+    #     verbose_name=_("Выбрать шаблон для страницы"),
+    #     help_text=_(
+    #         """
+    #         HTML-шаблон для контента страницы.
+    #         """
+    #     ),
+    # )
 
     def __str__(self):
         return "%s" % self.texts
@@ -99,14 +110,24 @@ class PageModel(BaseLinkModel):
         verbose_name = "Страница"
         verbose_name_plural = "Страница"
 
+class PageTemplatesMode(models.TextChoices):
+    """
+       This is a html templates list for the table "PageModel"
+    """
+    MAIN = "MAIN", "index"
+    ABOUT = "ABOUT", "about"
+    ACCOUNT = "ACCOUNT", "account"
+    PROFILE = "PROFILE", "profile"
+    NOTPAGE = "NOTPAGE", "404"
 
 class LevelMenu(models.TextChoices):
     """
-    'level' is a menu level 'top'. 'side' for a MenuNamesMode.level
+    'TOP' is a menu main level.
+    'SIDE' is a menu sub-level.
     """
 
-    TOP = "TOP", "Главное"
-    SIDE = "SIDE", "Боковое"
+    TOP = "TOP", _("Главное")
+    SIDE = "SIDE", _("Боковое")
 
 
 class MenuNamesMode(models.Model):
