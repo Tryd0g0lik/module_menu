@@ -74,12 +74,14 @@ class PageModel(BaseLinkModel):
     'links' is reference of the itself page.
     'texts' is header of the itself page.
     'menu_list' is menu list for publication to the page.
+    'template' The choice of the template for the page
     """
     MAIN = "index.html"
     ABOUT = "about/index.html"
     ACCOUNT = "account/index.html"
     PROFILE = "profile/index.html"
-    NOTPAGE = "NOTPAGE/index.html"
+    NOTPAGE = "404/index.html"
+    
     # PAGE_TEMPLATES = {
     #     MAIN: "index.html",
     #     ABOUT: "about/index.html",

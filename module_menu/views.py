@@ -13,6 +13,11 @@ class ModuleMenuViews(ModelViewSet):
 
 
 def get_index_page(request):
+    """
+    The choice of the template is autonomous, for the page
+    :param request:
+    :return:
+    """
     content = []
     # Get one page
     page_list = PageModel.objects.filter(active=True) \
@@ -41,8 +46,8 @@ def get_index_page(request):
     # [obj_refer for obj_refer in page_list if
     #  obj_refer.links == page_list[0].links] obj_menu for obj_menu in (SubLinksMode.objects.all()
     list_menu_all = SubLinksMode.objects.all()
-    
-    return render(request, template_name="index.html", context = {"context":
+    # The choice of the template is autonomous, for the page
+    return render(request, template_name=page_list[0].template, context = {"context":
         [
         {"ind":page_list[0].id, "links":page_list[0].links,
          "texts": page_list[0].texts},
