@@ -62,15 +62,26 @@ class BaseLinkModel(models.Model):
     class Meta:
         abstract = True
 
+class PageTemplatesMode(models.TextChoices):
+    """
+       This is a html templates list for the table "PageModel"
+    """
+    MAIN = "MAIN", "index"
+    ABOUT = "ABOUT", "about"
+    ACCOUNT = "ACCOUNT", "account"
+    PROFILE = "PROFILE", "profile"
+    NOTPAGE = "NOTPAGE", "404"
+
 
 class PageModel(BaseLinkModel):
     """
     One page
     'links' is reference of the itself page.
     'texts' is header of the itself page.
+    'menu_list' is menu list for publication to the page.
     """
 
-    menu_id = models.ManyToManyField(
+    menu_list = models.ManyToManyField(
         "MenuNamesMode",
         # blank=True,
         # null=True,
@@ -91,18 +102,18 @@ class PageModel(BaseLinkModel):
         """
         )
     )
-    # template = models.ForeignKey(
-    #     "PageTemplatesMode",
-    #     on_delete=models.CASCADE,
-    #     related_name="templates",
-    #     verbose_name=_("Выбрать шаблон для страницы"),
-    #     help_text=_(
-    #         """
-    #         HTML-шаблон для контента страницы.
-    #         """
-    #     ),
-    # )
+    template = models.CharField(
+        default=PageTemplatesMode.NOTPAGE,
+        choices=PageTemplatesMode.choices,
+        verbose_name=_("Выбрать шаблон для страницы"),
+        help_text=_(
+            """
+            HTML-шаблон для контента страницы.
+            """
+        ),
+    )
 
+    
     def __str__(self):
         return "%s" % self.texts
 
@@ -110,15 +121,6 @@ class PageModel(BaseLinkModel):
         verbose_name = "Страница"
         verbose_name_plural = "Страница"
 
-class PageTemplatesMode(models.TextChoices):
-    """
-       This is a html templates list for the table "PageModel"
-    """
-    MAIN = "MAIN", "index"
-    ABOUT = "ABOUT", "about"
-    ACCOUNT = "ACCOUNT", "account"
-    PROFILE = "PROFILE", "profile"
-    NOTPAGE = "NOTPAGE", "404"
 
 class LevelMenu(models.TextChoices):
     """
