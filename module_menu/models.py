@@ -62,17 +62,12 @@ class BaseLinkModel(models.Model):
     class Meta:
         abstract = True
 
-class PageTemplatesMode(models.TextChoices):
-    """
-       This is a html templates list for the table "PageModel"
-    """
-    MAIN = "MAIN", "index"
-    ABOUT = "ABOUT", "about"
-    ACCOUNT = "ACCOUNT", "account"
-    PROFILE = "PROFILE", "profile"
-    NOTPAGE = "NOTPAGE", "404"
+# class PageTemplatesMode(models.TextChoices):
+"""
+   This is a html templates list for the table "PageModel"
+"""
 
-
+    
 class PageModel(BaseLinkModel):
     """
     One page
@@ -80,7 +75,25 @@ class PageModel(BaseLinkModel):
     'texts' is header of the itself page.
     'menu_list' is menu list for publication to the page.
     """
-
+    MAIN = "index.html"
+    ABOUT = "about/index.html"
+    ACCOUNT = "account/index.html"
+    PROFILE = "profile/index.html"
+    NOTPAGE = "NOTPAGE/index.html"
+    # PAGE_TEMPLATES = {
+    #     MAIN: "index.html",
+    #     ABOUT: "about/index.html",
+    #     ACCOUNT: "account/index.html",
+    #     PROFILE: "profile/index.html",
+    #     NOTPAGE: "index.html"
+    # }
+    PAGE_TEMPLATES = [
+        (MAIN, "Главная"),
+        (ABOUT, "О нас"),
+        (ACCOUNT, "Аккаунт"),
+        (PROFILE, "Профиль"),
+        (NOTPAGE, "Страница не найдена")
+    ]
     menu_list = models.ManyToManyField(
         "MenuNamesMode",
         # blank=True,
@@ -103,8 +116,8 @@ class PageModel(BaseLinkModel):
         )
     )
     template = models.CharField(
-        default=PageTemplatesMode.NOTPAGE,
-        choices=PageTemplatesMode.choices,
+        default=NOTPAGE,
+        choices=PAGE_TEMPLATES,
         verbose_name=_("Выбрать шаблон для страницы"),
         help_text=_(
             """
@@ -113,7 +126,10 @@ class PageModel(BaseLinkModel):
         ),
     )
 
-    
+    # def is_upperclass(self):
+    #     return self.template in {
+    #         self.template
+    #     }
     def __str__(self):
         return "%s" % self.texts
 

@@ -18,11 +18,10 @@ def get_index_page(request):
     page_list = PageModel.objects.filter(active=True) \
      .filter(links=request.path)
     if len(request.path) == 1:
-        page_list = PageModel.objects.filter(active=True) \
-            .filter(links='index/')
+        page_list = PageModel.objects.filter(active=True).filter(links='index/')
     if len(page_list) == 0:
         return render(
-            request, template_name="404.html")
+            request, template_name="404/index.html")
     # Get a list of menu indexes menu
     id_page_of_request = page_list[0].id
     menu_id_list_has_page = [sub_link.name_id.id for sub_link
