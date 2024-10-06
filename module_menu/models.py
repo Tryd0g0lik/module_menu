@@ -52,7 +52,7 @@ class BaseLinkModel(models.Model):
                     Начинается из любой буквы. Заканчивается из любой буквы
                     и(или) цифры.
                     Допускается дефис и(или) нижнее подчёркивание.
-                    
+
                     """
                 ),
             ),
@@ -61,6 +61,34 @@ class BaseLinkModel(models.Model):
 
     class Meta:
         abstract = True
+
+
+class PageModel(BaseLinkModel):
+    """
+    One page
+    'links' is reference of the itself page.
+    'texts' is header of the itself page.
+    """
+
+    menu_id = models.ManyToManyField(
+        "MenuNamesMode",
+        blank=True,
+        null=True,
+        related_name="pages_menu",
+        verbose_name=_("Выбрать меню"),
+        help_text=_(
+            """
+            Список меню которые будут опубликованы на странице.
+            """
+        ),
+    )
+
+    def __str__(self):
+        return "%s" % self.texts
+
+    class Meta:
+        verbose_name = "Страница"
+        verbose_name_plural = "Страница"
 
 
 class LevelMenu(models.TextChoices):
@@ -114,19 +142,33 @@ class MenuNamesMode(models.Model):
         ),
         verbose_name=_("Уровень меню"),
     )
+    # pages_id = models.ForeignKey(
+    #     PageModel,
+    #     blank=True,
+    #     null=True,
+    #     on_delete=models.CASCADE,
+    #     related_name="pageыmenu",
+    #     verbose_name=_("Выбрать страницу"),
+    #     help_text=_(
+    #         """
+    #         Страница на которой будет опубликовано меню
+    #         """
+    #     ),
+    # )
 
     def __str__(self):
         return "%s" % (self.names)
 
     class Meta:
         verbose_name = _("Заголовок меню")
-        verbose_name_plural = _("Заголовки в меню")
+        verbose_name_plural = _("Меню")
 
 
 class LinksMode(BaseLinkModel):
     """
     References
     """
+
     active = models.BooleanField(
         verbose_name=_("Активное"),
         help_text=_(
@@ -135,6 +177,7 @@ class LinksMode(BaseLinkModel):
         """
         ),
     )
+
     def __str__(self):
         return self.texts
 
@@ -165,7 +208,7 @@ class SubLinksMode(BaseLinkModel):
         ],
         verbose_name=_("Маршрут"),
     )
-   
+
     name_id = models.ForeignKey(
         MenuNamesMode,
         on_delete=models.CASCADE,
