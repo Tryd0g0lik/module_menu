@@ -40,50 +40,6 @@
               Регистрация
             </a>
           </li>
-          {% if user.is_authenticated %}
-            <li class="nav-item dropdown">
-              <li clacc="nav-item">
-                <a href="/" class="dropdown">
-                <!-- a href="{ % url 'accounts:profile' % }" class="nav-link
-                dropdown-toggle" tada-togle="dropdown" role="button"
-                   aria-haspopup="true" aria-expanded="false" -->
-                  Профиль
-                </a>
-                <div class="dropdown-memu">
-                  <a href="/" class="dropdown">
-                  <!-- a class="dropdown-item"
-                   href="{ % url 'accounts:profile' % }" -->
-                    Мои объявления
-                  </a>
-                  <a href="/" class="dropdown">
-                  <!-- a class="dropdown-item"
-                  href="{ % url 'accounts:profile_change' % }" -->
-                    Изменить личные данные
-                  </a>
-                  <a href="/" class="dropdown">
-                  <!-- a href="{ % url 'accounts:password_change' % }"
-                   class="dropdown-item" -->
-                    Изменить пароль
-                  </a>
-                  <a href="/" class="dropdown">
-                  <!-- a href="{ % url 'accounts:profile_delete' % }"
-                   class="dropdown-item" -->
-                    Удалить
-                  </a>
-                  <a href="/" class="dropdown">
-                <!-- a class="dropdown-item"
-                href="{ % url 'accounts:logout' % }" -->
-                    Выход
-                  </a>
-                </div>
-              </li>
-            </li>
-          {% else %}
-            <li class="nav-item">
-              <a href="/">
-              <!-- a href="{ % url 'accounts:login' % }"-->Вход</a>
-            </li>
-          {% endif %}
 
           <li clacc="nav-item">
             <a href="/"  class="nav-link root" tada-togle="dropdown-item">
@@ -102,3 +58,41 @@
   </main>
 </body>
 </html>
+   <!--  li class="nav-item dropdown">
+              <li clacc="nav-item">
+                <a href="/" class="dropdown" -->
+                <!-- a href="{ % url 'accounts:profile' % }" class="nav-link
+                dropdown-toggle" tada-togle="dropdown" role="button"
+                   aria-haspopup="true" aria-expanded="false" -->
+                  <!-- Профиль
+                </a>
+                <div class="dropdown-memu">
+                  <a href="/" class="dropdown" -->
+                  <!-- a class="dropdown-item"
+                   href="{ % url 'accounts:profile' % }" -->
+                    <!-- Мои объявления
+                  </a>
+                  <a href="/" class="dropdown" -->
+                  <!-- a class="dropdown-item"
+                  href="{ % url 'accounts:profile_change' % }" -->
+                    <!-- Изменить личные данные
+                  </a>
+                  <a href="/" class="dropdown" -->
+                  <!-- a href="{ % url 'accounts:password_change' % }"
+                   class="dropdown-item" -->
+                    <!-- Изменить пароль
+                  </a>
+                  <a href="/" class="dropdown" -->
+                  <!-- a href="{ % url 'accounts:profile_delete' % }"
+                   class="dropdown-item" -->
+                    <!-- Удалить
+                  </a>
+                  <a href="/" class="dropdown" -->
+                <!-- a class="dropdown-item"
+                href="{ % url 'accounts:logout' % }" -->
+                    <!-- Выход
+                  </a>
+                </div>
+              </li>
+            </li -->
+

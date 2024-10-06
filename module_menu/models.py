@@ -151,19 +151,6 @@ class MenuNamesMode(models.Model):
         ),
         verbose_name=_("Уровень меню"),
     )
-    # pages_id = models.ForeignKey(
-    #     PageModel,
-    #     blank=True,
-    #     null=True,
-    #     on_delete=models.CASCADE,
-    #     related_name="pageыmenu",
-    #     verbose_name=_("Выбрать страницу"),
-    #     help_text=_(
-    #         """
-    #         Страница на которой будет опубликовано меню
-    #         """
-    #     ),
-    # )
 
     def __str__(self):
         return "%s" % (self.names)
@@ -176,6 +163,7 @@ class MenuNamesMode(models.Model):
 class LinksMode(BaseLinkModel):
     """
     References
+    'links' страница на которую ссылается ссылка
     """
 
     active = models.BooleanField(
