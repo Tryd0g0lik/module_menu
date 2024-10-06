@@ -20,10 +20,12 @@ def get_index_page(request):
     """
     content = []
     # Get one page
-    page_list = PageModel.objects.filter(active=True) \
-     .filter(links=request.path)
+    page_list = []
     if len(request.path) == 1:
         page_list = PageModel.objects.filter(active=True).filter(links='index/')
+    else:
+        page_list = PageModel.objects.filter(active=True) \
+            .filter(links=request.path[1:])
     if len(page_list) == 0:
         return render(
             request, template_name="404/index.html")
@@ -43,13 +45,12 @@ def get_index_page(request):
                 if obj.name_id.id == index
             ] for index in menu_id_list_has_page_unique
         ]
-    # [obj_refer for obj_refer in page_list if
-    #  obj_refer.links == page_list[0].links] obj_menu for obj_menu in (SubLinksMode.objects.all()
     list_menu_all = SubLinksMode.objects.all()
     # The choice of the template is autonomous, for the page
-    return render(request, template_name=page_list[0].template, context = {"context":
-        [
-        {"ind":page_list[0].id, "links":page_list[0].links,
-         "texts": page_list[0].texts},
-        references
-        ]})
+    return render(request, template_name=page_list[0].template, context={"context":
+        
+        {"ind":page_list[0].id,
+         "links":page_list[0].links, # The page's pathname
+         "texts": page_list[0].texts}, # header
+        "references":references
+        })

@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 
 from module_menu.routers import router_menu
 
@@ -31,6 +31,8 @@ urlpatterns = [
         "menu/",
         include((router_menu.urlpatterns, "module_menu"), namespace="module_menu"),
     ),
+    
+    re_path(r'^.*$', get_index_page, name='get_index_page'),
     path("api/v1/", include(router.urls)),
     path("", get_index_page, name="index"),
     # path("index/", get_index_page),

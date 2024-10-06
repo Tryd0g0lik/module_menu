@@ -7,7 +7,7 @@
   <meta charset = "UTF-8">
   <meta name="viewpost" content="width-device-width, initial-scale=1,
    shrink-to-fit-no">
-  <title>{% block title %}Главная{% endblock title %} - Module-manu</title>
+  <title>{% block title %}{{context.texts}}{% endblock title %} - Module-manu</title>
   {% bootstrap_css %}
   <link rel="stylesheet" type="text/css"
         href="{% static 'module_menu/styles/style.css' %}">
@@ -17,10 +17,10 @@
 <body class="container_fluid">
   <header>
     {% block header %}
-      <h1 classe="display-1 text-center">Module-menu </h1>
+      <h1 classe="display-1 text-center">Module-menu</h1>
     {% endblock header %}
     {% block content %}
-     <h2>O caйте</h2>
+     <h2>{{context.texts}}</h2>
     {% endblock content %}
     {% block headerContribute %}{% endblock headerContribute %}
   </header>
@@ -28,26 +28,18 @@
     <div class="row">
       <div class="nav-item">
         <ul class="col nav justify-content-end border">
-          <li clacc="nav-item">
-            <a href="{% url 'index' %}" class="nav-link" >
-              Главная
-            </a>
-          </li>
-          <li clacc="nav-item">
-            <a href="/" clacc="nav-item">
-            <!--a href="{ % url 'accounts:register:register' % }"
-            class="nav-link"-->
-              Регистрация
-            </a>
-          </li>
+          {% for reference_list in references %}
+            {% for reference  in reference_list %}
+              {% if reference.name_menu == "Top" %}
+                <li clacc="nav-item">
+                  <a href="/{{reference.links.links_id.links.links}}" class="nav-link" >
+                    {{ reference.links.links_id.texts }}
+                  </a>
+                </li>
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
 
-          <li clacc="nav-item">
-            <a href="/"  class="nav-link root" tada-togle="dropdown-item">
-            <!-- a href="{ % url 'about' % }"
-            class="nav-link root" tada-togle="dropdown-item" -->
-              О сайте
-            </a>
-          </li>
         </ul>
         {% block mainRowContribute %}{% endblock mainRowContribute %}
       </div>

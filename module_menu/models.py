@@ -81,14 +81,7 @@ class PageModel(BaseLinkModel):
     ACCOUNT = "account/index.html"
     PROFILE = "profile/index.html"
     NOTPAGE = "404/index.html"
-    
-    # PAGE_TEMPLATES = {
-    #     MAIN: "index.html",
-    #     ABOUT: "about/index.html",
-    #     ACCOUNT: "account/index.html",
-    #     PROFILE: "profile/index.html",
-    #     NOTPAGE: "index.html"
-    # }
+ 
     PAGE_TEMPLATES = [
         (MAIN, "Главная"),
         (ABOUT, "О нас"),
