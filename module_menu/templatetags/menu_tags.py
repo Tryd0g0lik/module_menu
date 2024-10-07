@@ -27,6 +27,8 @@ def draw_menu(levels):
     links_list = []
     # Получаем список references/links
     for ind in range(0, len(sub_links)):
+        if sub_links[ind].links_id.active == False:
+            continue
         # Проверяем наличие sub-links
         if sub_links[ind].texts != None:
             
@@ -71,7 +73,8 @@ def draw_menu(levels):
         level_class = "floater-menu"
 
     # Формируем HTML для меню
-    menu_html = f'<ul class="col nav justify-content-end border {level_class}">'
+    menu_html = f'<div class="nav-item">' \
+                f'<ul class="col nav justify-content-end border {level_class}">'
 
     for link in links_list:
         if len(link["sub"]) > 0:
@@ -90,6 +93,6 @@ def draw_menu(levels):
                          f'<a href="{link["links"]}" class="nav-link">' \
                          f'{link["texts"]}</a></li>'
 
-    menu_html += "</ul>"
+    menu_html += "</ul></div>"
     # публикуем в качестве html
     return mark_safe(menu_html)

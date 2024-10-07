@@ -19,10 +19,7 @@ from django.contrib import admin
 from django.urls import include, path, re_path
 
 from module_menu.routers import router_menu
-
-
 from module_menu.views import get_index_page
-
 from .rest_router import router
 
 urlpatterns = [
