@@ -48,6 +48,13 @@ TIME_ZONE = "Asia/Novosibirsk"
 # ...
 DEFAULT_CHARSET = "utf-8"
 ```
+## Commands
+Базовые команды от Django.
+
+## Dependence
+Удалите файл `pyproject.toml` если в качестве установщика используете `pip`. \
+Проект собирался на установщике `Poetry`\
+[requirements.txt](requirements.txt) продукт авто-сборки от `Poetry`.
 
 ## Descript
 Модуль не стал привязывать к пользователю.\

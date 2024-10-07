@@ -3,7 +3,7 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 
-from module_menu.models import PageModel, MenuNamesMode, SubLinksMode
+from module_menu.models import PageModel, SubLinksMode
 
 
 class ModuleMenuViews(ModelViewSet):
@@ -18,9 +18,8 @@ def get_index_page(request):
     :param request:
     :return:
     """
-    content = []
+
     # Get one page
-    page_list = []
     if len(request.path) == 1:
         page_list = PageModel.objects.filter(active=True).filter(links='index/')
     else:
@@ -45,7 +44,7 @@ def get_index_page(request):
                 if obj.name_id.id == index
             ] for index in menu_id_list_has_page_unique
         ]
-    list_menu_all = SubLinksMode.objects.all()
+
     # The choice of the template is autonomous, for the page
     return render(request, template_name=page_list[0].template, context={"context":
         
