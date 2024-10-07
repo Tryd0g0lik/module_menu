@@ -22,7 +22,44 @@ def draw_menu(levels):
 
     # Получаем подменю для данного меню
     sub_links = SubLinksMode.objects.filter(name_id=menu)
-
+    old_links_id = 9999999999999
+    old_name_id = 9999999999999
+    links_list = []
+    # Получаем список references/links
+    for ind in range(0, len(sub_links)):
+        # Проверяем наличие sub-links
+        if sub_links[ind].texts != None:
+            
+            links_id = sub_links[ind].links_id.id
+            name_id = sub_links[ind].name_id.id
+            if old_links_id == links_id and old_name_id == name_id:
+                links_list[-1]["sub"].append(
+                    {"sub_texts": sub_links[ind].texts,
+                     "sub_links": sub_links[ind].links}
+                )
+                old_links_id = links_id
+                old_name_id = name_id
+                continue
+            else:
+                links_list.append(
+                    {
+                        "texts": sub_links[ind].links_id.links.texts,
+                        "links": sub_links[ind].links_id.links.links,
+                        "sub": [
+                            {"sub_texts": sub_links[ind].texts,
+                             "sub_links": sub_links[ind].links}
+                        ]
+                    }
+                )
+                old_links_id = links_id
+                old_name_id = name_id
+        else:
+            links_list.append({
+                "texts": sub_links[ind].links_id.links.texts,
+                "links": sub_links[ind].links_id.links.links,
+                "sub": []
+            })
+    
     # Формируем HTML для меню с учетом уровня
     level_class = ""
 
@@ -36,11 +73,22 @@ def draw_menu(levels):
     # Формируем HTML для меню
     menu_html = f'<ul class="col nav justify-content-end border {level_class}">'
 
-    for link in sub_links:
-
-        if link.texts != None:
-            menu_html += f'<li class="nav-item"><a href="{link.links}" ' \
-                         f'class="nav-link" >{link.texts}</a></li>'
+    for link in links_list:
+        if len(link["sub"]) > 0:
+            menu_html += f'<li class="dropdown nav-item">' \
+                             f'<a href="{link["links"]}" ' \
+                             f'class="nav-link dropdown" >' \
+                             f'{link["texts"]}</a>' \
+                             f'<div class="dropdown-memu">'
+            for sub in link["sub"]:
+                menu_html += \
+                    f'<a href="{sub["sub_links"]} class="dropdown-item">' \
+                    f'{sub["sub_texts"]}</a>'
+            menu_html += f'</li>'
+        else:
+            menu_html += f'<li class="nav-item">' \
+                         f'<a href="{link["links"]}" class="nav-link">' \
+                         f'{link["texts"]}</a></li>'
 
     menu_html += "</ul>"
     # публикуем в качестве html
