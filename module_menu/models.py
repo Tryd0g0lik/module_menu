@@ -62,12 +62,13 @@ class BaseLinkModel(models.Model):
     class Meta:
         abstract = True
 
+
 # class PageTemplatesMode(models.TextChoices):
 """
    This is a html templates list for the table "PageModel"
 """
 
-    
+
 class PageModel(BaseLinkModel):
     """
     One page
@@ -76,18 +77,19 @@ class PageModel(BaseLinkModel):
     'menu_list' is menu list for publication to the page.
     'template' The choice of the template for the page
     """
+
     MAIN = "index.html"
     ABOUT = "about/index.html"
     ACCOUNT = "account/index.html"
     PROFILE = "profile/index.html"
     NOTPAGE = "404/index.html"
- 
+
     PAGE_TEMPLATES = [
         (MAIN, "Главная"),
         (ABOUT, "О нас"),
         (ACCOUNT, "Аккаунт"),
         (PROFILE, "Профиль"),
-        (NOTPAGE, "Страница не найдена")
+        (NOTPAGE, "Страница не найдена"),
     ]
     menu_list = models.ManyToManyField(
         "MenuNamesMode",
@@ -108,7 +110,7 @@ class PageModel(BaseLinkModel):
             """
          Страница "True"-публикуется.
         """
-        )
+        ),
     )
     template = models.CharField(
         default=NOTPAGE,
@@ -141,6 +143,7 @@ class LevelMenu(models.TextChoices):
 
     TOP = "TOP", _("Главное")
     SIDE = "SIDE", _("Боковое")
+    FLOATER = "FLOATER", _("Нижнее")
 
 
 class MenuNamesMode(models.Model):
@@ -256,7 +259,6 @@ class SubLinksMode(BaseLinkModel):
 
     name_id = models.ForeignKey(
         MenuNamesMode,
-        
         on_delete=models.CASCADE,
         related_name="linksmenu",
         verbose_name=_("Выбрать меню"),

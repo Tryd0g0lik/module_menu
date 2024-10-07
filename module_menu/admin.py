@@ -18,7 +18,7 @@ class MenuNamesInLine(admin.TabularInline):
 
 @admin.register(PageModel)
 class PageAdmin(admin.ModelAdmin):
-    fields = [("links", "texts","active", "template"),  "menu_list"]
+    fields = [("links", "texts", "active", "template"), "menu_list"]
     list_display = ["links", "texts"]
     # inlines = [MenuNamesInLine]
 
@@ -34,6 +34,6 @@ class LinksAdmin(admin.ModelAdmin):
 
 @admin.register(MenuNamesMode)
 class MenuNamesAdmin(admin.ModelAdmin):
-    fields = ["names"]
-    list_display = ["names"]
+    fields = ["names", "levels"]
+    list_display = ["names", "levels"]
     list_filter = []
