@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load float_menu_tag %}
+{% load menu_tags %}
 {% load bootstrap4 %}
 {% load static %}
 
@@ -32,7 +32,7 @@
           {% for reference_list in references %}
             {% for reference  in reference_list %}
               {% if reference.name_menu == "Top" %}
-                <li clacc="nav-item">
+                <li class="nav-item">
                   <a href="/{{reference.links.links_id.links.links}}" class="nav-link" >
                     {{ reference.links.links_id.texts }}
                   </a>
@@ -50,12 +50,15 @@
     </div>
   </main>
   <footer>
-    {% draw_menu 'Главное' %}
+
+    <div class="row">
+      {% draw_menu 'Главное' %}
+    </div>
   </footer>
 </body>
 </html>
    <!--  li class="nav-item dropdown">
-              <li clacc="nav-item">
+              <li class="nav-item">
                 <a href="/" class="dropdown" -->
                 <!-- a href="{ % url 'accounts:profile' % }" class="nav-link
                 dropdown-toggle" tada-togle="dropdown" role="button"

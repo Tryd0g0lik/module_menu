@@ -34,12 +34,13 @@ def draw_menu(levels):
         level_class = "floater-menu"
 
     # Формируем HTML для меню
-    menu_html = f'<ul class="{level_class}">'
+    menu_html = f'<ul class="col nav justify-content-end border {level_class}">'
 
     for link in sub_links:
 
         if link.texts != None:
-            menu_html += f'<li><a href="{link.links}">{link.texts}</a></li>'
+            menu_html += f'<li class="nav-item"><a href="{link.links}" ' \
+                         f'class="nav-link" >{link.texts}</a></li>'
 
     menu_html += "</ul>"
     # публикуем в качестве html
