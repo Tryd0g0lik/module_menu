@@ -73,25 +73,24 @@ def draw_menu(levels):
         level_class = "floater-menu"
 
     # Формируем HTML для меню
-    menu_html = f'<div class="nav-item">' \
-                f'<ul class="col nav justify-content-end border {level_class}">'
+    menu_html = f'''<div class="nav-item">
+<ul class="col nav justify-content-end border {level_class}">'''
 
     for link in links_list:
         if len(link["sub"]) > 0:
-            menu_html += f'<li class="dropdown nav-item">' \
-                             f'<a href="{link["links"]}" ' \
-                             f'class="nav-link dropdown" >' \
-                             f'{link["texts"]}</a>' \
-                             f'<div class="dropdown-memu">'
+            menu_html += f'''<li class="dropdown nav-item">
+<a href="{link['links']}" class="nav-link dropdown" >
+{link["texts"]}</a>
+<div class="dropdown-memu">'''
             for sub in link["sub"]:
                 menu_html += \
-                    f'<a href="{sub["sub_links"]} class="dropdown-item">' \
-                    f'{sub["sub_texts"]}</a>'
+                    f'''<a href="{sub['sub_links']}" class="dropdown-item">
+{sub["sub_texts"]}</a>'''
             menu_html += f'</li>'
         else:
-            menu_html += f'<li class="nav-item">' \
-                         f'<a href="{link["links"]}" class="nav-link">' \
-                         f'{link["texts"]}</a></li>'
+            menu_html += f'''<li class="nav-item">
+<a href="{link['links']}" class="nav-link">
+{link["texts"]}</a></li>'''
 
     menu_html += "</ul></div>"
     # публикуем в качестве html

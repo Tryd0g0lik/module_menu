@@ -24,3 +24,43 @@ outhor button{
   min-height: 29px;
   max-height: 29px;
 }
+
+/* Скрываем дочернее меню по умолчанию */
+.dropdown-memu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 1000;
+}
+
+/* Показываем дочернее меню при наведении на родительский элемент */
+.dropdown.nav-item:hover .dropdown-memu {
+    display: block; /* Показываем меню при наведении на родителя */
+}
+
+/* Эффекты для дочерних ссылок */
+.dropdown-item {
+    padding: 10px;
+    text-decoration: none;
+    color: #000;
+    transition: all 0.3s ease;
+}
+
+
+.dropdown-item:hover {
+    font-size: 1.1em;
+    text-decoration: underline;
+    color: #007bff;
+}
+
+
+.nav-link {
+    padding: 10px;
+    text-decoration: none;
+    color: #000;
+}
+
+.nav-link:hover {
+    color: #007bff;
+}
